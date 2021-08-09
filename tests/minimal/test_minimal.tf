@@ -11,36 +11,30 @@ terraform {
   }
 }
 
+resource "aci_rest" "infraAccPortP" {
+  dn         = "uni/infra/accportprof-LEAF101"
+  class_name = "infraAccPortP"
+}
+
 module "main" {
   source = "../.."
 
-  name = "ABC"
+  interface_profile = aci_rest.infraAccPortP.content.name
+  name              = "1-1"
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "infraHPortS" {
+  dn = "uni/infra/accportprof-LEAF101/hports-${module.main.name}-typ-range"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "infraHPortS" {
+  component = "infraHPortS"
 
   equal "name" {
     description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
-  }
-
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = ""
-  }
-
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = ""
+    got         = data.aci_rest.infraHPortS.content.name
+    want        = module.main.name
   }
 }
