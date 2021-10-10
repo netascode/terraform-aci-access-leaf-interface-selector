@@ -9,7 +9,7 @@ resource "aci_rest" "infraHPortS" {
 
 resource "aci_rest" "infraRsAccBaseGrp" {
   count      = var.policy_group != "" || var.fex_id != 0 ? 1 : 0
-  dn         = "${aci_rest.infraHPortS.id}/rsaccBaseGrp"
+  dn         = "${aci_rest.infraHPortS.dn}/rsaccBaseGrp"
   class_name = "infraRsAccBaseGrp"
   content = {
     fexId = var.fex_id != 0 ? var.fex_id : null
@@ -19,7 +19,7 @@ resource "aci_rest" "infraRsAccBaseGrp" {
 
 resource "aci_rest" "infraPortBlk" {
   for_each   = { for block in var.port_blocks : block.name => block }
-  dn         = "${aci_rest.infraHPortS.id}/portblk-${each.value.name}"
+  dn         = "${aci_rest.infraHPortS.dn}/portblk-${each.value.name}"
   class_name = "infraPortBlk"
   content = {
     name     = each.value.name
