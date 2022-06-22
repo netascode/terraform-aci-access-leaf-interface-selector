@@ -29,6 +29,13 @@ module "main" {
     from_port   = 1
     to_port     = 2
   }]
+  sub_port_blocks = [{
+    name          = "SPB1"
+    description   = "My Description"
+    from_port     = 1
+    from_sub_port = 1
+    to_sub_port   = 2
+  }]
 }
 
 data "aci_rest_managed" "infraHPortS" {
@@ -111,6 +118,64 @@ resource "test_assertions" "infraPortBlk" {
   equal "toPort" {
     description = "toPort"
     got         = data.aci_rest_managed.infraPortBlk.content.toPort
+    want        = "2"
+  }
+}
+
+data "aci_rest_managed" "infraSubPortBlk" {
+  dn = "${data.aci_rest_managed.infraHPortS.id}/subportblk-SPB1"
+
+  depends_on = [module.main]
+}
+
+resource "test_assertions" "infraSubPortBlk" {
+  component = "infraSubPortBlk"
+
+  equal "name" {
+    description = "name"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.name
+    want        = "SPB1"
+  }
+
+  equal "descr" {
+    description = "descr"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.descr
+    want        = "My Description"
+  }
+
+  equal "fromCard" {
+    description = "fromCard"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.fromCard
+    want        = "1"
+  }
+
+  equal "toCard" {
+    description = "toCard"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.toCard
+    want        = "1"
+  }
+
+  equal "fromPort" {
+    description = "fromPort"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.fromPort
+    want        = "1"
+  }
+
+  equal "toPort" {
+    description = "toPort"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.toPort
+    want        = "1"
+  }
+
+  equal "fromSubPort" {
+    description = "fromSubPort"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.fromSubPort
+    want        = "1"
+  }
+
+  equal "toSubPort" {
+    description = "toSubPort"
+    got         = data.aci_rest_managed.infraSubPortBlk.content.toSubPort
     want        = "2"
   }
 }

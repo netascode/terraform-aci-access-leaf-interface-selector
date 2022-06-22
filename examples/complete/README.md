@@ -26,6 +26,13 @@ module "aci_access_leaf_interface_selector" {
     from_port   = 1
     to_port     = 2
   }]
+  sub_port_blocks = [{
+    name          = "SPB1"
+    description   = "My Description"
+    from_port     = 1
+    from_sub_port = 1
+    to_sub_port   = 2
+  }]
 }
 ```
 <!-- END_TF_DOCS -->
