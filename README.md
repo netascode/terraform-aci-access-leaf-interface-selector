@@ -13,7 +13,7 @@ Location in GUI:
 ```hcl
 module "aci_access_leaf_interface_selector" {
   source  = "netascode/access-leaf-interface-selector/aci"
-  version = ">= 0.1.0"
+  version = ">= 0.1.1"
 
   interface_profile = "LEAF101"
   name              = "1-2"
