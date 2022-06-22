@@ -13,7 +13,7 @@ resource "aci_rest_managed" "infraRsAccBaseGrp" {
   class_name = "infraRsAccBaseGrp"
   content = {
     fexId = var.fex_id != 0 ? var.fex_id : null
-    tDn   = var.fex_id != 0 ? "uni/infra/fexprof-${var.fex_interface_profile}/fexbundle-${var.fex_interface_profile}" : (var.policy_group_type == "access" ? "uni/infra/funcprof/accportgrp-${var.policy_group}" : "uni/infra/funcprof/accbundle-${var.policy_group}")
+    tDn   = var.fex_id != 0 ? "uni/infra/fexprof-${var.fex_interface_profile}/fexbundle-${var.fex_interface_profile}" : (var.policy_group_type == "access" ? "uni/infra/funcprof/accportgrp-${var.policy_group}" : var.policy_group_type == "breakout" ? "uni/infra/funcprof/brkoutportgrp-${var.policy_group}" : "uni/infra/funcprof/accbundle-${var.policy_group}")
   }
 }
 
