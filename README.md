@@ -13,7 +13,7 @@ Location in GUI:
 ```hcl
 module "aci_access_leaf_interface_selector" {
   source  = "netascode/access-leaf-interface-selector/aci"
-  version = ">= 0.1.1"
+  version = ">= 0.2.0"
 
   interface_profile = "LEAF101"
   name              = "1-2"
@@ -39,7 +39,7 @@ module "aci_access_leaf_interface_selector" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_aci"></a> [aci](#requirement\_aci) | >= 2.0.0 |
 
 ## Providers
@@ -58,8 +58,8 @@ module "aci_access_leaf_interface_selector" {
 | <a name="input_fex_interface_profile"></a> [fex\_interface\_profile](#input\_fex\_interface\_profile) | FEX interface profile name. | `string` | `""` | no |
 | <a name="input_policy_group_type"></a> [policy\_group\_type](#input\_policy\_group\_type) | Interface policy group type. Choices: `access`, `pc`, `vpc`, `breakout`. | `string` | `"access"` | no |
 | <a name="input_policy_group"></a> [policy\_group](#input\_policy\_group) | Interface policy group name. | `string` | `""` | no |
-| <a name="input_port_blocks"></a> [port\_blocks](#input\_port\_blocks) | List of port blocks. Allowed values `from_module`, `to_module`: 1-9. Default value `from_module`, `to_module`: 1. Allowed values `from_port`, `to_port`: 1-127. Default value `to_port`: `from_port`. | <pre>list(object({<br>    name        = string<br>    description = optional(string)<br>    from_module = optional(number)<br>    to_module   = optional(number)<br>    from_port   = number<br>    to_port     = optional(number)<br>  }))</pre> | `[]` | no |
-| <a name="input_sub_port_blocks"></a> [sub\_port\_blocks](#input\_sub\_port\_blocks) | List of sub port blocks. Allowed values `from_module`, `to_module`: 1-9. Default value `from_module`, `to_module`: 1. Allowed values `from_port`, `to_port`: 1-127. Default value `to_port`: `from_port`. Allowed values `from_sub_port`, `to_sub_port`: 1-16. Default value `to_sub_port`: `from_sub_port`. | <pre>list(object({<br>    name          = string<br>    description   = optional(string)<br>    from_module   = optional(number)<br>    to_module     = optional(number)<br>    from_port     = number<br>    to_port       = optional(number)<br>    from_sub_port = number<br>    to_sub_port   = optional(number)<br>  }))</pre> | `[]` | no |
+| <a name="input_port_blocks"></a> [port\_blocks](#input\_port\_blocks) | List of port blocks. Allowed values `from_module`, `to_module`: 1-9. Default value `from_module`, `to_module`: 1. Allowed values `from_port`, `to_port`: 1-127. Default value `to_port`: `from_port`. | <pre>list(object({<br>    name        = string<br>    description = optional(string, "")<br>    from_module = optional(number, 1)<br>    to_module   = optional(number)<br>    from_port   = number<br>    to_port     = optional(number)<br>  }))</pre> | `[]` | no |
+| <a name="input_sub_port_blocks"></a> [sub\_port\_blocks](#input\_sub\_port\_blocks) | List of sub port blocks. Allowed values `from_module`, `to_module`: 1-9. Default value `from_module`, `to_module`: 1. Allowed values `from_port`, `to_port`: 1-127. Default value `to_port`: `from_port`. Allowed values `from_sub_port`, `to_sub_port`: 1-16. Default value `to_sub_port`: `from_sub_port`. | <pre>list(object({<br>    name          = string<br>    description   = optional(string, "")<br>    from_module   = optional(number, 1)<br>    to_module     = optional(number)<br>    from_port     = number<br>    to_port       = optional(number)<br>    from_sub_port = number<br>    to_sub_port   = optional(number)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

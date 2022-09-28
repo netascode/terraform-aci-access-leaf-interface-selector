@@ -23,10 +23,10 @@ resource "aci_rest_managed" "infraPortBlk" {
   class_name = "infraPortBlk"
   content = {
     name     = each.value.name
-    descr    = each.value.description != null ? each.value.description : ""
-    fromCard = each.value.from_module != null ? each.value.from_module : "1"
+    descr    = each.value.description
+    fromCard = each.value.from_module
     fromPort = each.value.from_port
-    toCard   = each.value.to_module != null ? each.value.to_module : (each.value.from_module != null ? each.value.from_module : "1")
+    toCard   = each.value.to_module != null ? each.value.to_module : each.value.from_module
     toPort   = each.value.to_port != null ? each.value.to_port : each.value.from_port
   }
 }
@@ -37,10 +37,10 @@ resource "aci_rest_managed" "infraSubPortBlk" {
   class_name = "infraSubPortBlk"
   content = {
     name        = each.value.name
-    descr       = each.value.description != null ? each.value.description : ""
-    fromCard    = each.value.from_module != null ? each.value.from_module : "1"
+    descr       = each.value.description
+    fromCard    = each.value.from_module
     fromPort    = each.value.from_port
-    toCard      = each.value.to_module != null ? each.value.to_module : (each.value.from_module != null ? each.value.from_module : "1")
+    toCard      = each.value.to_module != null ? each.value.to_module : each.value.from_module
     toPort      = each.value.to_port != null ? each.value.to_port : each.value.from_port
     fromSubPort = each.value.from_sub_port
     toSubPort   = each.value.to_sub_port != null ? each.value.to_sub_port : each.value.from_sub_port
