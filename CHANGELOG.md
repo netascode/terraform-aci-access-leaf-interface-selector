@@ -1,3 +1,6 @@
+## 0.2.1 (unreleased)
+
+- Add colon to allowed characters of names
 
 ## 0.2.0
 
